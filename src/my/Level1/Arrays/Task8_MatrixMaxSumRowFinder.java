@@ -35,11 +35,12 @@ public class Task8_MatrixMaxSumRowFinder {
         arraySise[1] = sizeTwo;
         return arraySise;
     }
+
     //1. Заполнение массива array [][] из консоли.
-    public static int [][] arrayFillingOfConsole (int [] arraySize ){
+    public static int[][] arrayFillingOfConsole(int[] arraySize) {
         int[][] ar1ray = new int[arraySize[0]][arraySize[1]];
-        for (int i=0; i< ar1ray.length; i++ ){
-            for (int j = 0; j< ar1ray[i].length; j++) {
+        for (int i = 0; i < ar1ray.length; i++) {
+            for (int j = 0; j < ar1ray[i].length; j++) {
                 System.out.println("Input one array [" + i + "]; Input two array [" + j + "]");
                 ar1ray[i][j] = scanner.nextInt();
             }
@@ -63,25 +64,26 @@ public class Task8_MatrixMaxSumRowFinder {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] = random.nextInt(10);
             }
-        }return  array;
+        }
+        return array;
     }
 
     // Вывод на печать массива arrayFilingOf [][]
-    public static void matrixArray (int [][] array ){
-        for (int i=0; i<array.length; i++){
+    public static void matrixArray(int[][] array) {
+        for (int i = 0; i < array.length; i++) {
             System.out.println();
-            for (int j=0; j<array[i].length;j++){
-                System.out.print(array [i][j]+" ");
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.print(array[i][j] + " ");
             }
         }
     }
 
     public static void main(String[] args) {
-        int [] arraySize = arraySize();
+        int[] arraySize = arraySize();
         System.out.println(Arrays.toString(arraySize));
-        int [][] arrayFilingOfrandom = arrayFilingOfrandom (arraySize);
-        matrixArray (arrayFilingOfrandom);
-        int [][] arrayFillingOfConsole = arrayFillingOfConsole( arraySize );
+        int[][] arrayFilingOfrandom = arrayFilingOfrandom(arraySize);
+        matrixArray(arrayFilingOfrandom);
+        int[][] arrayFillingOfConsole = arrayFillingOfConsole(arraySize);
         //System.out.println(Arrays.deepToString(arrayFillingOfConsole));
     }
 }

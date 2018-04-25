@@ -12,6 +12,9 @@ findLastPositiveElemIndex без if'ов и используя только ци
 В названии методов принято вставлять глаголы.
 Т.е. метод array лучше назвать fillArray, randomFillArray...
  */
+//1
+//2
+//3
 
 import java.util.*;
 

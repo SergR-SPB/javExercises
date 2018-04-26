@@ -7,6 +7,9 @@ package my.Level1.Arrays;
               бросить исключение IllegalArgumentException.
    Предполагается, что матрица прямоугольная.
    int maxSumRowIndex(int[][] matrix)
+   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         Пример работы есть, но у Вас я не вижу метода maxSumRowIndex. Метод принимает матрицу и возвращает индекс!
+   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    Пример работы:
    maxSumRowIndex(new int[][]{
    {0, 3, -2},
@@ -14,6 +17,7 @@ package my.Level1.Arrays;
    {-1, 5, 2}
    }) == 1
 */
+//код не был отформатирован! Приучите себя не только перед коммитом форматировать, но и в процессе написания. Нажимайте Ctrl+Alt+L как можно чаще!
 
 import java.util.*;
 
@@ -26,18 +30,18 @@ public class Task8_MatrixMaxSumRowFinder {
 
     //Ввод размеров массива array [][]:
     public static int[] arraySize() {
-        int[] arraySise = new int[2];
+        int[] arraySize = new int[2];                       //было зеленым подчеркнуто!
         System.out.println("Input array size one:");
         int sizeOne = scanner.nextInt();
-        arraySise[0] = sizeOne;
+        arraySize[0] = sizeOne;
         System.out.println("Input array size one:");
         int sizeTwo = scanner.nextInt();
-        arraySise[1] = sizeTwo;
+        arraySize[1] = sizeTwo;
 
-        if (arraySise[0]==0) {
+        if (arraySize[0] == 0) {
             throw new IllegalArgumentException("You entered an invalid value++");
         }
-        return arraySise;
+        return arraySize;
     }
 
     //Выбор метода заполнения массива [][] array
@@ -51,7 +55,7 @@ public class Task8_MatrixMaxSumRowFinder {
             matrixArray(array);
             return array;
         } else {
-            int[][] array = arrayFilingOfrandom(arraySize);
+            int[][] array = arrayFilingOfRandom(arraySize);
             matrixArray(array);
             return array;
         }
@@ -71,7 +75,7 @@ public class Task8_MatrixMaxSumRowFinder {
     }
 
     //2. Заполнение массива array[][] случайными числами.
-    public static int[][] arrayFilingOfrandom(int[] arraySize) {
+    public static int[][] arrayFilingOfRandom(int[] arraySize) {        //camelCase!!! слова были подчеркнуты зеленым
         int[][] array = new int[arraySize[0]][arraySize[1]];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
@@ -96,74 +100,69 @@ public class Task8_MatrixMaxSumRowFinder {
 
     }
 
-    /* Создание int [] arraySumstring, где каждый элемент массива
+    /* Создание int [] arraySumString, где каждый элемент массива
      сумма строки массива int [][] array.*/
-    public static int[] arraySumstring(int[][] array) {
-        int[] arraySumstring = new int[array.length];
+    public static int[] arraySumString(int[][] array) {             //camelCase!!! слова были подчеркнуты зеленым
+        int[] arraySumString = new int[array.length];               //camelCase!!! слова были подчеркнуты зеленым
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                arraySumstring[i] = arraySumstring[i] + array[i][j];
+                arraySumString[i] = arraySumString[i] + array[i][j];
             }
         }
-        return arraySumstring;
+        return arraySumString;
     }
 
     // Метод поиска индекса строки с максимальной суммой элементов.
-    public static int idMaxarraySumstring(int[] arraySumstring) {
-        int max = arraySumstring[1];
-       // int maxNext = arraySumstring[arraySumstring.length - 1];
-        int idMax = 1;
-      //  int idMaxNext = 1;
-        for (int i = 0; i < arraySumstring.length; i++) {
-            if (max < arraySumstring[i]) {
-                max = arraySumstring[i];
-                idMax = i;
+    //В принципе верно
+    public static int idMaxArraySumString(int[] arraySumString) {       //camelCase!!! слова были подчеркнуты зеленым
+        int max = arraySumString[0];                                    //индексация с нуля идет!
+        // int maxNext = arraySumString[arraySumString.length - 1];
+        int index = 0;
+        //  int idMaxNext = 1;
+        for (int i = 1; i < arraySumString.length; i++) {               //начинаем с 1, так как ранее "запомнили" нулевой элемент
+            if (max < arraySumString[i]) {
+                max = arraySumString[i];
+                index = i;
             }
-        }
-            /*for (int i = arraySumstring.length - 1; i >= 0; i--) {
-                if (maxNext < arraySumstring[i]) {
-                    maxNext = arraySumstring[i];
-                    idMaxNext = i;
-                }
-            }
-            if (idMax != idMaxNext) {
-                return idMax;
-            } else {
-                return 100;
-            }*/
-        return idMax;
         }
 
-        // Метод поиска индекса строки с равной максимальной суммой элементов.
-        public static int idMax_NextarraySumstring ( int[] arraySumstring){
-            int max1 = arraySumstring[1];
-            int idMax1 = 1;
-            for (int i = arraySumstring.length - 1; i >= 0; i--) {
-                if (max1 < arraySumstring[i]) {
-                    max1 = arraySumstring[i];
-                    idMax1 = i;
-                }
-            }
-            return idMax1;
-        }
-
-        public static void main (String[]args){
-            int[] arraySize = arraySize();
-            System.out.println(Arrays.toString(arraySize));
-            int[][] array = arrayChoice(arraySize);
-            int[] arraySumstring = arraySumstring(array);
-            System.out.println(Arrays.toString(arraySumstring));
-            int idMax = idMaxarraySumstring(arraySumstring);
-            System.out.println(idMax);
-            int idMax1 = idMax_NextarraySumstring(arraySumstring);
-            System.out.println(idMax1);
-            if (idMax != idMax1) {
-                System.out.println("Not idMaxarraySumstring ---  1");
-            } else {
-               System.out.println("idMaxarraySumstring=" + idMax);
-            }
-
-        }
+        return index;
     }
+
+    // Метод поиска индекса строки с равной максимальной суммой элементов.
+    //На самом деле Вы тут находите последний максимальный элемент!
+    //имена не исправлял, но тут и ранее Вы не id, а index ищите
+    public static int idMaxNextArraySumString(int[] arraySumString) {     //camelCase!!! слова были подчеркнуты зеленым
+        //индексация с нуля начинается. Почему тут индекс 1?
+        int max1 = arraySumString[0];
+        int idMax1 = 0;
+        //если перебирать с конца, то Вы найдете последний элемент, который равен максимальному. Я так понял этот метод просто для проверки
+        for (int i = arraySumString.length - 1; i > 0; i--) {
+            if (max1 < arraySumString[i]) {
+                max1 = arraySumString[i];
+                idMax1 = i;
+            }
+        }
+        return idMax1;
+    }
+
+    public static void main(String[] args) {
+        int[] arraySize = arraySize();
+        System.out.println(Arrays.toString(arraySize));
+        int[][] array = arrayChoice(arraySize);
+        int[] arraySumString = arraySumString(array);               //camelCase!!! слова были подчеркнуты зеленым
+        System.out.println(Arrays.toString(arraySumString));
+        int idMax = idMaxArraySumString(arraySumString);
+        System.out.println(idMax);
+        int idMax1 = idMaxNextArraySumString(arraySumString);
+        System.out.println(idMax1);
+        if (idMax != idMax1) {
+            System.out.println("Not idMaxArraySumString ---  1");
+        } else {
+            System.out.println("idMaxArraySumString=" + idMax);
+        }
+
+    }
+}
 

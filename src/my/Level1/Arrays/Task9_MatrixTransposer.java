@@ -36,8 +36,6 @@ public class Task9_MatrixTransposer {
         //System.out.println("Size matrix[][] = " + Arrays.toString(arraySise));
         int[][] sourceMatrix = matrix(arraySize); // 2. Выбор способа заполнения,  формирование массива [][] matrix и вывод на консоль
         int[][] transpose = transpose(sourceMatrix); //3. Транспонирование int[][] transpose(int[][] sourceMatrix)
-
-
     }
 
     // Test.
@@ -60,7 +58,6 @@ public class Task9_MatrixTransposer {
         int[][] transpose = new int[sourceMatrix[0].length][sourceMatrix.length];
         for (int i = 0; i < transpose.length; i++) {
             for (int j = 0; j < transpose[i].length; j++) {
-
                 transpose[i][j] = sourceMatrix[j][i];
                 System.out.print(transpose[i][j] + " ");
             }
@@ -86,12 +83,12 @@ public class Task9_MatrixTransposer {
         return arraySize;
     }
 
-
     // 2. Выбор способа заполнения, формирование массива [][] matrix и вывод на консоль
     public static int[][] matrix(int[] arraySize) {
 
         int[][] matrix = new int[arraySize[0]][arraySize[1]];
         System.out.println("Choice of array filing method:");
+        System.out.println("If \"1\" - console method.");
         System.out.println("If \"2\" - random method.");
         int m = scanner.nextInt();
         System.out.println("---------------------------");
@@ -123,7 +120,6 @@ public class Task9_MatrixTransposer {
     //2.0 Выбор способа заполнения массива [][] matrix и вывод на консоль
     public static int[][] arrayChoice(int[] arraySize) {
         System.out.println("Choice of array filing method:");
-
         System.out.println("If \"1\" - console method.");
         System.out.println("If \"2\" - random method.");
         int m = scanner.nextInt();

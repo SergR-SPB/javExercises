@@ -5,7 +5,7 @@ package my.Level1.Arrays;
         что матрица прямоугольная. Если матрица НЕ квадратная,
         бросить исключение IllegalArgumentException.
         https://ru.wikipedia.org/wiki/Единичная_матрица
-        boolean isIdentity(int[][] matrix)
+        boolean isIdentity(int[][] chooseMatrix)
         ---------------------------
         wiki:::
         Едини́чная ма́трица — квадратная матрица, элементы главной диагонали которой
@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+//старайтесь не называть переменные и методы одинаково. это ухудшает читаемость.
 public class Task10_IdentityMatrixChecker {
 
     static Scanner scanner = new Scanner(System.in);
@@ -49,9 +50,10 @@ public class Task10_IdentityMatrixChecker {
         test1();                   //1. Тест
         test2();
         //test3();
-        int[][] ints = matrix();   // 3. Выбор тестовой матрицы для проверки.
-        boolean isIdentity = isIdentity(ints); // 2.Анализ тестовых матриц на соответствие Единичной матрице
-        System.out.println(isIdentity);
+        int[][] matrix = chooseMatrix();   // 3. Выбор тестовой матрицы для проверки.
+        System.out.println("Matrix\n" + Arrays.deepToString(matrix));
+        boolean isIdentity = isIdentity(matrix); // 2.Анализ тестовых матриц на соответствие Единичной матрице
+        System.out.println("isIdentity == " + isIdentity);
     }
 
     // 1. Test:
@@ -102,7 +104,9 @@ public class Task10_IdentityMatrixChecker {
 
 
     // 2. Анализ тестовых матриц на соответствие Единичной матрице
+    //почитайте про |, & и ||, && - это разные операторы http://www.quizful.net/interview/java/java-interview
     //Как решить через определение boolean isIdentity = (ints[i][j] == 1 & i == j | ints[i][j] == 0 & i != j);
+    //не понял зачем isIdentity?
     //Почему не получается так:
     /*for (int i = 0; i < ints.length; i++) {
         for (int j = 0; j < ints[i].length; j++) {
@@ -112,7 +116,7 @@ public class Task10_IdentityMatrixChecker {
         }
     }
         return false;*/
-
+    //по условию было boolean isIdentity(int[][] chooseMatrix) - зачем выдумывать новое название для параметра (ints)?
     public static boolean isIdentity(int[][] ints) {
 
 
@@ -123,7 +127,8 @@ public class Task10_IdentityMatrixChecker {
                 throw new IllegalArgumentException("Matrix is not square");
             }
             for (int j = 0; j < ints[i].length; j++) {
-                if (ints[i][j] != 1 && i == j || ints[i][j] != 0 && i != j) {
+                if ((ints[i][j] != 1 && i == j)
+                        || (ints[i][j] != 0 && i != j)) {   //
                     return false;
                 }
             }
@@ -132,7 +137,7 @@ public class Task10_IdentityMatrixChecker {
     }
 
     // 3. Выбор тестовой матрицы для проверки.
-    public static int[][] matrix() {
+    public static int[][] chooseMatrix() {
         System.out.print("Input № test task:   \n" +
 
                 " № 1        {1, 0, 0},\n" +
@@ -147,31 +152,64 @@ public class Task10_IdentityMatrixChecker {
                 "             {0, 1, 0},\n" +
                 "             {0, 0, 1},\n" +
                 "             {0, 0, 0}\n\n" +
+                " № 4        Random matrix\n\n " +
+                " № 5        Identity matrix\n\n" +
                 "  Input №:_____ ");
         int num = scanner.nextInt();
 
+        int[][] matrix;
         if (num == 1) {
-            int[][] matrix = new int[][]{
+            matrix = new int[][]{
                     {1, 0, 0},
                     {0, 1, 0},
                     {0, 0, 1}
             };
-            return matrix;
         } else if (num == 2) {
-            int[][] ints = new int[][]{
+            matrix = new int[][]{
                     {1, 0, 2},
                     {0, 1, 0},
                     {2, 0, 1}
             };
-            return ints;
-        } else /*if (num == 3)*/{
+        } else if (num == 3) {
+            matrix = new int[][]{
+                    {1, 0, 0},
+                    {0, 1, 0},
+                    {0, 0, 1},
+                    {0, 0, 0}
+            };
+        } else if (num == 4) {
+            matrix = randomMatrix(6, 6);
+        } else if (num == 5) {
+            matrix = identityMatrix(6);
+        } else {
             throw new IllegalArgumentException("Matrix is not square");
-        } /*else {
+        }
+        /*else {
             Task9_MatrixTransposer.arraySize();
             throw new IllegalArgumentException("Is not testing №!");
         }*/
-        // Как вставить продолжение (собственный выбор матрицы
+        // Как вставить продолжение (собственный выбор матрицы              продолжить цепочку if-else. Не пойму почему проблемы возникли
         // Task9_MatrixTransposer.arraySize();) принимая во внимание
-        // капризность return ints;
+        // капризность return ints;         что значит капризность? Вы объявили какой тип будете возвразать. в return передаете именно то, что объявили
+        return matrix;
+    }
+
+    private static int[][] identityMatrix(int size) {
+        int[][] matrix = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            matrix[i][i] = 1;
+        }
+        return matrix;
+    }
+
+    private static int[][] randomMatrix(int rows, int cols) {
+        int[][] matrix = new int[rows][cols];
+        Random random = new Random();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = random.nextInt(20);
+            }
+        }
+        return matrix;
     }
 }

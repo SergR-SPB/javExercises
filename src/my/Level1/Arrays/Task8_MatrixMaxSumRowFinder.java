@@ -3,13 +3,10 @@ package my.Level1.Arrays;
    Task 8 (MatrixMaxSumRowFinder)
    Прошу проверить : Написать метод поиска индекса строки с максимальной суммой элементов.
    Если таких строк несколько, вернуть индекс первой.
-              Если матрица пустая (нет ни одной строки),
-              бросить исключение IllegalArgumentException.
+   Если матрица пустая (нет ни одной строки),
+   бросить исключение IllegalArgumentException.
    Предполагается, что матрица прямоугольная.
    int maxSumRowIndex(int[][] matrix)
-   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         Пример работы есть, но у Вас я не вижу метода maxSumRowIndex. Метод принимает матрицу и возвращает индекс!
-   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    Пример работы:
    maxSumRowIndex(new int[][]{
    {0, 3, -2},
@@ -17,7 +14,6 @@ package my.Level1.Arrays;
    {-1, 5, 2}
    }) == 1
 */
-//код не был отформатирован! Приучите себя не только перед коммитом форматировать, но и в процессе написания. Нажимайте Ctrl+Alt+L как можно чаще!
 
 import java.util.*;
 
@@ -30,139 +26,154 @@ public class Task8_MatrixMaxSumRowFinder {
 
     //Ввод размеров массива array [][]:
     public static int[] arraySize() {
-        int[] arraySize = new int[2];                       //было зеленым подчеркнуто!
+        int[] arraySise = new int[2];
         System.out.println("Input array size one:");
         int sizeOne = scanner.nextInt();
-        arraySize[0] = sizeOne;
+        arraySise[0] = sizeOne;
         System.out.println("Input array size one:");
         int sizeTwo = scanner.nextInt();
-        arraySize[1] = sizeTwo;
+        arraySise[1] = sizeTwo;
 
-        if (arraySize[0] == 0) {
+        if (arraySise[0] == 0) {
             throw new IllegalArgumentException("You entered an invalid value++");
         }
-        return arraySize;
+        return arraySise;
     }
 
-    //Выбор метода заполнения массива [][] array
+    //Выбор метода заполнения массива [][] matrix
     public static int[][] arrayChoice(int[] arraySize) {
         System.out.println("Choice of array filling method:");
         System.out.println("If \"1\" - console filling.");
         System.out.println("If \"2\" - random filling.");
         int n = scanner.nextInt();
         if (n == 1) {
-            int[][] array = arrayFillingOfConsole(arraySize);
-            matrixArray(array);
-            return array;
+            int[][] matrix = arrayFillingOfConsole(arraySize);
+            matrixArray(matrix);
+            return matrix;
         } else {
-            int[][] array = arrayFilingOfRandom(arraySize);
-            matrixArray(array);
-            return array;
+            int[][] matrix = arrayFilingOfRandom(arraySize);
+            matrixArray(matrix);
+            return matrix;
         }
     }
 
     //1. Заполнение массива array [][] из консоли.
     public static int[][] arrayFillingOfConsole(int[] arraySize) {
-        int[][] array = new int[arraySize[0]][arraySize[1]];
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
+        int[][] matrix = new int[arraySize[0]][arraySize[1]];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
                 System.out.println("Input one array [" + i + "]; Input two array [" + j + "]");
-                array[i][j] = scanner.nextInt();
+                matrix[i][j] = scanner.nextInt();
             }
         }
-        System.out.println(Arrays.deepToString(array));
-        return array;
+        System.out.println(Arrays.deepToString(matrix));
+        return matrix;
     }
 
     //2. Заполнение массива array[][] случайными числами.
-    public static int[][] arrayFilingOfRandom(int[] arraySize) {        //camelCase!!! слова были подчеркнуты зеленым
-        int[][] array = new int[arraySize[0]][arraySize[1]];
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = random.nextInt(10);
+    public static int[][] arrayFilingOfRandom(int[] arraySize) {
+        int[][] matrix = new int[arraySize[0]][arraySize[1]];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = random.nextInt(10);
             }
         }
-        return array;
+        return matrix;
     }
 
     // Вывод на печать массива arrayFilingOf... [][] и вывод ID с максимальной суммой
-    public static void matrixArray(int[][] array) {
+    public static void matrixArray(int[][] matrix) {
         int max = 1;
         int idMax = 1;
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             System.out.println();
-            for (int j = 0; j < array[i].length; j++) {
-                System.out.print(array[i][j] + " ");
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
             }
         }
         System.out.println();
 
     }
 
-    /* Создание int [] arraySumString, где каждый элемент массива
-     сумма строки массива int [][] array.*/
-    public static int[] arraySumString(int[][] array) {             //camelCase!!! слова были подчеркнуты зеленым
-        int[] arraySumString = new int[array.length];               //camelCase!!! слова были подчеркнуты зеленым
+    /*Метод поиска индекса строки с максимальной суммой (метод 1:int maxSumRow1Index(int[] arraySumString))*/
+    public static int maxSumRow1Index(int[] arraySumString) {
+        int max = arraySumString[0];
+        int idMax = 0;
+        for (int i = 0; i < arraySumString.length; i++) {
+            if (max < arraySumString[i]) {
+                max = arraySumString[i];
+                idMax = i;
+            }
+        }
+        return idMax;
+    }
 
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                arraySumString[i] = arraySumString[i] + array[i][j];
+    /* Создание int [] arraySumString, где каждый элемент массива(для метода 1:int maxSumRow1Index(int[] arraySumString))
+     сумма строки массива int [][] matrix.*/
+    public static int[] arraySumString(int[][] matrix) {
+        int[] arraySumString = new int[matrix.length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                arraySumString[i] = arraySumString[i] + matrix[i][j];
             }
         }
         return arraySumString;
     }
 
-    // Метод поиска индекса строки с максимальной суммой элементов.
-    //В принципе верно
-    public static int idMaxArraySumString(int[] arraySumString) {       //camelCase!!! слова были подчеркнуты зеленым
-        int max = arraySumString[0];                                    //индексация с нуля идет!
-        // int maxNext = arraySumString[arraySumString.length - 1];
+    //индекс строки с максимальной суммой
+    /*Метод поиска индекса строки с максимальной суммой (метод 2:int maxSumRow2Index(int[][] matrix))*/
+    private static int maxSumRow2Index(int[][] matrix) {
+        if (matrix.length == 0) {
+            throw new IllegalArgumentException("Matrix is empty");
+        }
+        int max = sumRow(matrix, 0);
         int index = 0;
-        //  int idMaxNext = 1;
-        for (int i = 1; i < arraySumString.length; i++) {               //начинаем с 1, так как ранее "запомнили" нулевой элемент
-            if (max < arraySumString[i]) {
-                max = arraySumString[i];
+        for (int i = 1; i < matrix.length; i++) {
+            int sum = sumRow(matrix, i);
+            if (max < sum) {
+                max = sum;
                 index = i;
             }
         }
-
         return index;
     }
 
-    // Метод поиска индекса строки с равной максимальной суммой элементов.
-    //На самом деле Вы тут находите последний максимальный элемент!
-    //имена не исправлял, но тут и ранее Вы не id, а index ищите
-    public static int idMaxNextArraySumString(int[] arraySumString) {     //camelCase!!! слова были подчеркнуты зеленым
-        //индексация с нуля начинается. Почему тут индекс 1?
-        int max1 = arraySumString[0];
-        int idMax1 = 0;
-        //если перебирать с конца, то Вы найдете последний элемент, который равен максимальному. Я так понял этот метод просто для проверки
-        for (int i = arraySumString.length - 1; i > 0; i--) {
-            if (max1 < arraySumString[i]) {
-                max1 = arraySumString[i];
-                idMax1 = i;
-            }
+    /*сумма по строке(для метода 2:int maxSumRow2Index(int[][] matrix))*/
+    private static int sumRow(int[][] matrix, int row) {
+        int sum = 0;
+        for (int i = 0; i < matrix[row].length; i++) {
+            sum += matrix[row][i];
         }
-        return idMax1;
+        return sum;
     }
 
+    private static void test() {
+        System.out.println("Test:");
+        int index = maxSumRow2Index(new int[][]{
+                {0, 3, -2},
+                {2, 50, 3},
+                {-1, 5, 2}
+        });
+        System.out.println("      maxSumRowIndex(new int[][]{\n" +
+                "                {0, 3, -2},\n" +
+                "                {2, 50, 3},\n" +
+                "                {-1, 5, 2}\n" +
+                "      }) == " + index + "\n\n");
+    }
+
+
     public static void main(String[] args) {
+        test();
         int[] arraySize = arraySize();
         System.out.println(Arrays.toString(arraySize));
-        int[][] array = arrayChoice(arraySize);
-        int[] arraySumString = arraySumString(array);               //camelCase!!! слова были подчеркнуты зеленым
+        int[][] matrix = arrayChoice(arraySize);
+        int[] arraySumString = arraySumString(matrix);
         System.out.println(Arrays.toString(arraySumString));
-        int idMax = idMaxArraySumString(arraySumString);
-        System.out.println(idMax);
-        int idMax1 = idMaxNextArraySumString(arraySumString);
-        System.out.println(idMax1);
-        if (idMax != idMax1) {
-            System.out.println("Not idMaxArraySumString ---  1");
-        } else {
-            System.out.println("idMaxArraySumString=" + idMax);
-        }
-
+        int idMax = maxSumRow1Index(arraySumString);
+        System.out.println("maxSumRowIndex (m1) == " + idMax);
+        System.out.println("maxSumRowIndex (m2) == " + maxSumRow2Index(matrix));
     }
 }
 

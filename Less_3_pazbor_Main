@@ -1,0 +1,145 @@
+    public static void main(String[] args) {
+        // п1. Положим в поля кл. Car какиелибо значения:
+
+        // Создадим обьект/переменную Ford типа Car:
+
+//  [   Car ford;
+
+        // В переменной Ford мы можем обратиться к полям класса Car.
+        //Обращаться к полям класса [и методам] можно через точку.
+
+//  [   ford.brend = "Ford"; // Но мочему выдается ошибка???   ]
+
+                // Дело в том, что по сути, переменные бывают только примитвными,
+                // все что не примитив - называется по другому: Обьект, Инстенз, Экземпляр,
+                // Reference, object, instance, экземпляр - название переменной не примитивного типа.
+
+        //  Ошибка выдается потому - что ме не проинициировали обект, мы его обьявили
+        // но не дали никакого значения.
+        //  В чем оснавная разница между примитив. переменными иобектами:
+        // Примитивы имеют заранее известный размер выделяемой памяти,
+        // для обьектов - размер памяти зарание никогда не известен.
+        // Поэтому когда создается новый обьект - нужно выделить под него память:
+        // Код строки 9 переписываем в другом виде, а именно:
+
+        Car ford = new Car();   // А затем код - строка 14
+        ford.brand = "FORD";
+        ford.color = "RED";
+        ford.wheelSize = 16;     // В обьектах хранится ссылка на память переменных!!!!
+
+        //Выводим также, через точку - ford.brand:
+        System.out.println("Brand: "+ford.brand);
+        System.out.println("Color: "+ford.color);
+
+        // Создадим ещё один обьект KIA типа Car:
+        Car KIA = new Car();
+        KIA.brand = "KIA";
+        KIA.color = "BLACK";
+        KIA.wheelSize = 15;
+
+        //Меняя переменную, например brand в одном обьекте, мы никак не влияем
+        //на переменную brand другого обьекта: У каждого обьекта свои значения полей!!!!
+        System.out.println("переменная Brand: "+ford.brand+" не влияет на "+KIA.brand);
+
+        //Конец п.1 переходим опять в класс Car и создадим какиелибо методы
+
+        // ! [смотри  class Сar]
+        // ! Создан метод accelerate
+
+        //Начало п2. Перейдем в класс Main и вызовем  метод accelerate у обьекта KIA и ford.
+
+        KIA.accelerate(); // после компиляции напечатается "currentSpeed: 10.0"
+
+        //Введем переменныю для KIA -  maxSpeed = 175
+        KIA.maxSpeed = 175;
+
+        KIA.accelerate(); // после компиляции будет показана постоянно увелич. текущая скорость
+
+        System.out.println("Current speed KIA: " + KIA.currentSpeed);
+        System.out.println("Current speed KIA: " + KIA.GetCurrentspeed());
+        //Current speed KIA: 180.0
+        //Current speed KIA: 180.0
+
+        System.out.println("Current speed Ford: " + ford.GetCurrentspeed());
+        System.out.println("Current speed Ford: " + ford.currentSpeed);
+        //Current speed Ford: 0.0
+        //Current speed Ford: 0.0
+
+        ford.accelerate();
+        //currentSpeed: 10.0
+
+        System.out.println("Current speed Ford: " + ford.GetCurrentspeed());
+        System.out.println("Current speed Ford: " + ford.currentSpeed);
+        //Current speed Ford: 10.0
+        //Current speed Ford: 10.0
+
+        //Введем переменныю для Ford -  maxSpeed = 200
+        ford.maxSpeed = 200;
+
+        System.out.println("Current speed Ford: " + ford.GetCurrentspeed());
+        //Current speed Ford: 10.0
+
+
+        //вызовем  метод accelerate у обьекта ford.
+        ford.accelerate(); // после компиляции будет показана постоянно увелич. текущая скорость
+
+        //Конец п.2 переходим опять в класс Car и создадим ещё метод
+
+        // ! [смотри  class Сar]
+        // ! Создан метод changeColor
+
+        //Начало п3. Перейдем в класс Main и создадим новый чистый обьект mazda
+
+        Car mazda = new Car();
+        mazda.color = "Grey";
+        mazda.currentSpeed = 40;
+        mazda.maxSpeed = 200;
+
+        //Создадим новую переменную currentColor которая будет результатом
+        // смены цвета при скорости 100
+        String currentColor = mazda.changeColor(100);
+
+        //Выведем цвет мазды при скорости 100
+        System.out.println("String currentColor = mazda.changeColor(100): "+currentColor);
+        //или
+        System.out.println("String currentColor = mazda.changeColor(100): "+mazda.changeColor(100));
+        //String currentColor = mazda.changeColor(100): Grey
+        //или
+        //String currentColor = mazda.changeColor(100): Grey
+
+        //Цвет на поменялся потому что currentSpeed > speed
+        //Ускорим мазду вызвав метод accelerate()
+        mazda.accelerate();
+
+        ////Создадим новую переменную colorAccelerate которая будет результатом
+        // смены цвета при после ускорения
+
+        String colorAccelerate = mazda.changeColor(100);
+
+        System.out.println("Mazda color  after Accelerate: "+colorAccelerate);
+        //На консоли получим ускорение и смену цвета.
+
+
+        System.out.println("Mazda currentSpeed  after Accelerate: " + mazda.currentSpeed);
+        System.out.println("Mazda color  after Accelerate: " + currentColor);
+        //Mazda currentSpeed  after Accelerate: 210.0
+        //Mazda color  after Accelerate: Grey  ПОЧЕМУ НЕ ЗЕЛЁНЫЙ
+        // ведьпо условию
+        /*
+        String changeColor (int speed){
+        if(currentSpeed > speed) {
+            color = "Grin";
+
+        }
+        return  color;
+    }
+
+       и
+       String currentColor = mazda.changeColor(100);
+       и
+       currentSpeed  after Accelerate: 210.0
+       =>> 210>100 =>> color = "Grin"
+*/
+
+    }
+}

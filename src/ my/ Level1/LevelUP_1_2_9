@@ -1,0 +1,18 @@
+/*9. Создайте программу, выводящую
+на экран первые 20 элементов
+последовательности 2 4 8 16 32 64 128 ….*/
+
+
+public class Level2_9 {
+    public static void main(String[] args) {
+        int min = 1;
+        int max = 20;
+        int x = 2;
+        int number = 2;
+
+        for (int i = min; i <= max; i ++) {
+            System.out.println(i+" / "+number);
+            number*=x;
+        }
+    }
+}

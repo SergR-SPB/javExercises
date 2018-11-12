@@ -1,0 +1,48 @@
+
+/*4. Создать программу, выводящую на экран случайно
+сгенерированное трёхзначное натуральное число
+и его наибольшую цифру. Примеры работы программы:
+
+В числе 208 наибольшая цифра 8.
+В числе 774 наибольшая цифра 7.
+В числе 613 наибольшая цифра 6
+*/
+
+import java.util.Random;
+
+public class Level2_4 {
+    public static void main(String[] args) {
+
+        //1. Генерация случайного числа [min,max)
+        int min = 100;
+        int max = 1000;
+        Random random = new Random();
+        int rBaza = min + random.nextInt(max - min);
+        int r = rBaza;
+        System.out.println("Random numeric: " + r);
+        System.out.println("--------------- ");
+        //2. Нахождение наибошей чифры из числа
+        int zeroNumeric = 3;
+        int numeric = 10;
+        int startingPoint = 0;
+        int endPoint = 0;
+        for (int i = zeroNumeric; i > 0; i--) {
+
+            int q = (int) Math.pow(numeric, (i - 1));
+            //System.out.println(q);
+            int x = (r / q);
+            r = (r - x * q);
+            //System.out.println(x + "//"  + r);
+            if (x >= startingPoint) {
+                endPoint = x;
+                startingPoint = endPoint;
+
+            } else {
+                endPoint = startingPoint;
+            }
+            //System.out.println("endPoint: " + endPoint);
+        }
+        System.out.println("В числе "+rBaza+" наибольшая цифра " + endPoint+".");
+
+    }
+}

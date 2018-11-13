@@ -5,10 +5,12 @@ package my.OOP.Task3;
 для счета-фактуры - ид, покупателя и сумарную стоимость*/
 public class Customer {
 
+    public static int ligthArrray;
     private   int id;
     private String name;
     private double cashVoucher;
     private double sales;
+
 
 
 
@@ -47,18 +49,19 @@ public class Customer {
 
 
 
-    public static void main(String[] args) {
+    public  void RuneCustomer() {
         Customer[]customers = new Customer[5];
         customers[0] = new Customer(1,"A",100,5);
         customers[1] = new Customer(2,"B",200,10);
         customers[2] = new Customer(3,"C",300,15);
         customers[3] = new Customer(4,"D",400,20);
         customers[4] = new Customer(5,"E",500,25);
+        ligthArrray = customers.length;}
 
-        for(int i = 0; i<customers.length; i++){
+        /*for(int i = 0; i<customers.length; i++){
             System.out.println("Customer-"+customers[i].id+", name: "+customers[i].name+
                    ", cashVoucher: "+ customers[i].cashVoucher +", sales: " +customers[i].sales );
-        }}
+        }}*/
 
 
 

@@ -36,8 +36,6 @@ public class Invoice {
             invoices[i]=new Invoice(customers[i].getId(), totalCost+=customers[i].getCashVoucher());
 
 
-            /*System.out.println("Customer-" + customers[i].getId() + ", name: " + customers[i].getName() +
-                    ", cashVoucher: " + customers[i].getCashVoucher() + ", sales: " + customers[i].getSales());*/
         }
     }
 

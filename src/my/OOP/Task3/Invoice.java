@@ -4,19 +4,30 @@ package my.OOP.Task3;
 для счета-фактуры - ид, покупателя и сумарную стоимость*/
 
 public class Invoice {
-    Customer customer = new Customer(15,"gh",5,5);
-    double totalCost;
-    int id = customer.getId();
-    double cashVoucher =customer.getCashVoucher();
 
-    public double bidHriceCustomer(double cashVoucher) {
 
-        totalCost+=cashVoucher;
+
+    private Customer customer;
+    private double totalCost;
+    //int id ;
+    //double cashVoucher ;
+
+
+    public Invoice(Customer customer,double totalCost){
+
+        this.customer  = customer;
+        this.totalCost = totalCost;
+    }
+    public Invoice(){
+
+    }public double bidHriceCustomer() {
+        Customer customer = new Customer();
+
+        totalCost+=this.customer.getCashVoucher();
         return totalCost;
     }
-    public Invoice(int id,double totalCost){
-        this.id = id;
-        this.totalCost = bidHriceCustomer(cashVoucher);
-    }
+    public Customer getCustomer() { return customer; }
+    public double getTotalCost() { return totalCost; }
+
 
 }

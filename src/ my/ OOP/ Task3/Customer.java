@@ -28,27 +28,6 @@ public class Customer {
     public double getCashVoucher() { return cashVoucher; }
     public double getSales() { return sales; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public  void RuneCustomer() {
         Customer[]customers = new Customer[5];
         customers[0] = new Customer(1,"A",100,5);

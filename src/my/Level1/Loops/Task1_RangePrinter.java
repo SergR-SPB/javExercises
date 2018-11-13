@@ -29,4 +29,5 @@ public class Task1_RangePrinter {
         int last = argument();
         printRange(first, last);
     }
+
 }

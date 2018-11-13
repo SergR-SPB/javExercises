@@ -12,7 +12,6 @@ public class Invoice {
     //int id ;
     //double cashVoucher ;
 
-
     public Invoice(Customer customer,double totalCost){
 
         this.customer  = customer;

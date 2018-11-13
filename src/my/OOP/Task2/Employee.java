@@ -53,6 +53,5 @@ public class Employee {
                     "/ plannedIncreaseSalary: " + employees[i].plannedIncreaseSalary + "/ annualSalary: " + employees[i].annualSalary);
         }
         System.out.println("count:  "+countStaff);
-
     }
 }

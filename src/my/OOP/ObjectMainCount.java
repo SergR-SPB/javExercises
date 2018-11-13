@@ -1,6 +1,8 @@
 package my.OOP;
+
 /*1. Написать класс, который умеет считать
 количество созданных объектов этого класса.*/
+
 public class ObjectMainCount {
 
     static int count;

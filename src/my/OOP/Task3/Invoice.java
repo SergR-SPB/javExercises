@@ -3,32 +3,41 @@ package my.OOP.Task3;
 Для каждого покупателя хранить ид, имя и размер скидки;
 для счета-фактуры - ид, покупателя и сумарную стоимость*/
 
-import java.security.PublicKey;
-
 public class Invoice {
-
-
-
-    //private Customer customer;
-    private double totalCost;
-    private int id ;
+    private int id;                  //это id для счета-фактуры и с id покупателя никак не связано
     private Customer customer;
-    //double cashVoucher ;
+    private long totalCost;          //деньги храним в целом числе
 
-    public Invoice(int id,double totalCost){
+    public Invoice(int id, Customer customer, long totalCost) {
 
-        this.id  = id;
+        this.id = id;
+        this.customer = customer;
         this.totalCost = totalCost;
     }
-    public Invoice(){
 
-    }public double bidHriceCustomer() {
+    public double bidHriceCustomer() {
 
-        totalCost+=this.customer.getId();
+//        totalCost+=this.customer.getId();
         return totalCost;
     }
-    public int id() { return id; }
-    public double getTotalCost() { return totalCost; }
+
+    public int id() {
+        return id;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    /*!!!  Не хватает геттеров-сеттеров для полей и переопределенного метода toString() !!!*/
+
+    //стоимость со скидкой
+    public long costWithDiscount() {
+        return (long) (totalCost * (1 - customer.getDiscount()));
+    }
+
+    /*
+    что это за метод и как он должен работать не ясно!
     public void RuneInvoice() {
         Customer[] customers = new Customer[Customer.ligthArrray];
         Invoice []invoices = new Invoice[Customer.ligthArrray];
@@ -38,6 +47,7 @@ public class Invoice {
 
         }
     }
+    */
 
 
 }

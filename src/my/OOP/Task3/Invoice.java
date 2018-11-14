@@ -10,26 +10,26 @@ public class Invoice {
 
 
     //private Customer customer;
-    private double totalCost;
-    private int id ;
-    private Customer customer;
+     double totalCost;
+     int id ;
+     Customer customer;
     //double cashVoucher ;
 
-    public Invoice(int id,double totalCost){
+    public Invoice(double totalCost){
 
         this.id  = id;
         this.totalCost = totalCost;
     }
-    public Invoice(){
+    public Invoice(int id, double cashVoucher){
 
     }public double bidHriceCustomer() {
 
         totalCost+=this.customer.getId();
         return totalCost;
     }
-    public int id() { return id; }
+    public int getId() { return id; }
     public double getTotalCost() { return totalCost; }
-    public void RuneInvoice() {
+    /*public void RuneInvoice() {
         Customer[] customers = new Customer[Customer.ligthArrray];
         Invoice []invoices = new Invoice[Customer.ligthArrray];
         for (int i = 0; i < customers.length; i++) {
@@ -37,7 +37,7 @@ public class Invoice {
 
 
         }
-    }
+    }*/
 
 
 }

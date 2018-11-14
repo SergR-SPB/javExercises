@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+/*
+5. В три переменные a, b и c явно записаны программистом три
+целых попарно неравных между собой числа.
+Создать программу, которая переставит числа в переменных таким образом,
+чтобы при выводе на экран последовательность a, b и c оказалась строго возрастающей.
+
+Числа в переменных a, b и c: 3, 9, -1
+Возрастающая последовательность: -1, 3, 9
+
+ */
+public class Level2_5 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите первое целое число: ");
+        int a = scanner.nextInt();
+        System.out.println("Введите второе целое число: ");
+        int b = scanner.nextInt();
+        System.out.println("Введите третье целое число: ");
+        int c = scanner.nextInt();
+
+        System.out.println("Введена последовательность  [а,b,c] = [" + a + "," + b + "," + c + "]");
+
+// Переменные искомой последовательности
+        int min = 0;
+        int centr = 0;
+        int max = 0;
+/*
+// вариант 1 без цикла - перебором:
+            if (a < b && a < c) {
+                min = a;
+            } else if (a>b && a<c||a<b && a>c){
+                centr = a;
+            } else {
+                max=a;
+            }
+
+            if (b < a && b < c) {
+                min = b;
+            }else if (b>a && b<c||b<a && b>c){
+                centr = b;
+            } else {
+                max=b;
+            }
+
+            if (c < a && c < b) {
+                min = c;
+            } else if (c>a && c<b||c<a && c>b){
+                centr = c;
+            } else  {
+                max = c;
+            }
+
+            System.out.println("Искмая последовательность = [" + min + "," + centr + "," + max + "]");
+*/
+// Вариант 2 - подсмотренный - непонятно как работает
+/*
+            int x;
+            System.out.println("Числа в переменных a, b и c : " + a  + " " + b + " " + c);
+            if (a > b) {
+                x = a; a = b; b = x;
+            }
+            if (b > c){
+                x = b; b = c; c = x;
+            }
+            System.out.println("Возрастающая последовательность: " + a  + " " + b + " " + c);
+*/
+// Вариант 3 с циклом for
+        for (int i = 3; i > 0; i--) {
+                if (a < b && a < c) {
+                    min = a;
+                } else if (a > b && a < c || a < b && a > c) {
+                    centr = a;
+                } else {
+                    max = a;
+                }
+            int x = a; // Переставление переменных местами для послед. итерации
+            a = b;
+            b = c;
+            c = x;
+        }
+        System.out.println("Искмая последовательность = [" + min + "," + centr + "," + max + "]");
+    }
+
+}
+

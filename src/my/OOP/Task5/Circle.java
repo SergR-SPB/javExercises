@@ -12,4 +12,8 @@ public class Circle extends Shape {
         //return (lines[0]*lines[0])/(4*pi);
         return (calculatePerimeter()*calculatePerimeter())/(4*pi);
     }
+    @Override
+    public String toString() {
+        return String.valueOf(" CircleSquare: "+calculateSquare());
+    }
 }

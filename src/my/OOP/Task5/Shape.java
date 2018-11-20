@@ -5,9 +5,12 @@ package my.OOP.Task5;
 список фигур. Вывести площади всех фигур на экран.
 Вопрос: как нужно изменить модификаторы доступа.*/
 
+import java.util.ArrayList;
+
 public class Shape {
     //Поле класса общее для всех дальнейших вычислений
     public int[]lines;
+    ArrayList<Object> list = new ArrayList <>();
 
     /*public int[] getLines() { return lines; }
     public void setLines(int... lines) { this.lines = lines; }*/

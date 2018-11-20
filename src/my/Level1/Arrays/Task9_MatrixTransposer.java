@@ -25,16 +25,19 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+//метод для транспонирования верный. с вводом-выводом намудрили...
 public class Task9_MatrixTransposer {
 
     static Scanner scanner = new Scanner(System.in);
     static Random random = new Random();
 
     public static void main(String[] args) {
-        test();
-        int[] arraySize = arraySize();     //1. Ввод размеров массива [sizeOne][sizeTwo] matrix;
-        //System.out.println("Size matrix[][] = " + Arrays.toString(arraySise));
-        int[][] sourceMatrix = matrix(arraySize); // 2. Выбор способа заполнения,  формирование массива [][] matrix и вывод на консоль
+        test();                             //достаточно было код из test() разместить в main()
+        //если хотели делать ручной ввод или случайную матрицу, то не плоходы было показать в консоле результат работы.
+        //а то код ниже выполнится, но результат пользователь не увидет.
+        int[] arraySize = arraySize();     //1. Ввод размеров массива [sizeOne][sizeTwo] chooseMatrix;
+        //System.out.println("Size chooseMatrix[][] = " + Arrays.toString(arraySise));
+        int[][] sourceMatrix = matrix(arraySize); // 2. Выбор способа заполнения,  формирование массива [][] chooseMatrix и вывод на консоль
         int[][] transpose = transpose(sourceMatrix); //3. Транспонирование int[][] transpose(int[][] sourceMatrix)
     }
 
@@ -45,14 +48,20 @@ public class Task9_MatrixTransposer {
                 "{1, 2, 3, 4},\n" +
                 "{5, 6, 7, 8}\n");
         System.out.println("matrixTransposeTest:");
-        int[][] matrixTest = transpose(new int[][]{
+        int[][] source = {
                 {1, 2, 3, 4},
                 {5, 6, 7, 8}
-        });
+        };
+        int[][] result = transpose(source);
+
         System.out.println("--------------------------");
+        System.out.println("source:\n" + Arrays.deepToString(source));
+        System.out.println("\nresult:\n" + Arrays.deepToString(result));
     }
 
     //3. Транспонирование int[][] transpose(int[][] sourceMatrix)
+    //метод должен только транспонировать. можете выводить какую-то информацию для себя чтоб легче было отлаживать программу, но после удаляйте лишнее
+    //вызывая метод для транспонирования пользователь не ожидает (и не факт что хочет) чтобы метод еще что-то и на печать выводил
     public static int[][] transpose(int[][] sourceMatrix) {
 
         int[][] transpose = new int[sourceMatrix[0].length][sourceMatrix.length];
@@ -66,7 +75,7 @@ public class Task9_MatrixTransposer {
         return transpose;
     }
 
-    //1. Ввод размеров массива [sizeOne][sizeTwo] matrix;
+    //1. Ввод размеров массива [sizeOne][sizeTwo] chooseMatrix;
     public static int[] arraySize() {
         int[] arraySize = new int[2];
         System.out.println("Input array size one:");
@@ -78,12 +87,12 @@ public class Task9_MatrixTransposer {
         System.out.println("Input array size two:");
         int sizeTwo = scanner.nextInt();
         arraySize[1] = sizeTwo;
-        System.out.println("Size matrix[][] = " + Arrays.toString(arraySize));
+        System.out.println("Size chooseMatrix[][] = " + Arrays.toString(arraySize));
         System.out.println();
         return arraySize;
     }
 
-    // 2. Выбор способа заполнения, формирование массива [][] matrix и вывод на консоль
+    // 2. Выбор способа заполнения, формирование массива [][] chooseMatrix и вывод на консоль
     public static int[][] matrix(int[] arraySize) {
 
         int[][] matrix = new int[arraySize[0]][arraySize[1]];
@@ -98,7 +107,7 @@ public class Task9_MatrixTransposer {
                 for (int j = 0; j < matrix[i].length; j++) {
                     System.out.print("Input one array [" + i + "]; input two array [" + j + "]  ");
                     matrix[i][j] = scanner.nextInt();
-                    //System.out.print(matrix[i][j] + " ");// неполучилось!!!!!!!!!1
+                    //System.out.print(chooseMatrix[i][j] + " ");// неполучилось!!!!!!!!!1
                 }
             }
             System.out.println(Arrays.deepToString(matrix));
@@ -117,7 +126,7 @@ public class Task9_MatrixTransposer {
         }
     }
 
-    //2.0 Выбор способа заполнения массива [][] matrix и вывод на консоль
+    //2.0 Выбор способа заполнения массива [][] chooseMatrix и вывод на консоль
     public static int[][] arrayChoice(int[] arraySize) {
         System.out.println("Choice of array filing method:");
         System.out.println("If \"1\" - console method.");
@@ -134,7 +143,7 @@ public class Task9_MatrixTransposer {
         }
     }
 
-    // 2.1. Заполнение массива [][]matrix случайнами цифрами.
+    // 2.1. Заполнение массива [][]chooseMatrix случайнами цифрами.
     public static int[][] randomMatrix(int[] arraySize) {
         int[][] randomMatrix = new int[arraySize[0]][arraySize[1]];
         for (int i = 0; i < randomMatrix.length; i++) {
@@ -145,7 +154,7 @@ public class Task9_MatrixTransposer {
         return randomMatrix;
     }
 
-    // 2.2. Заполнение массива [][]matrix с консоли.
+    // 2.2. Заполнение массива [][]chooseMatrix с консоли.
     public static int[][] consoleMatrix(int[] arraySize) {
         int[][] consoleMatrix = new int[arraySize[0]][arraySize[1]];
         for (int i = 0; i < consoleMatrix.length; i++) {
@@ -157,7 +166,7 @@ public class Task9_MatrixTransposer {
         return consoleMatrix;
     }
 
-    // 2.3. Вывод массива [][] matrix на консоль
+    // 2.3. Вывод массива [][] chooseMatrix на консоль
     public static void printMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             System.out.println();

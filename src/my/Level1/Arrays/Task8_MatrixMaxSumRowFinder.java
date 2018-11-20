@@ -6,7 +6,7 @@ package my.Level1.Arrays;
    Если матрица пустая (нет ни одной строки),
    бросить исключение IllegalArgumentException.
    Предполагается, что матрица прямоугольная.
-   int maxSumRowIndex(int[][] matrix)
+   int maxSumRowIndex(int[][] chooseMatrix)
    Пример работы:
    maxSumRowIndex(new int[][]{
    {0, 3, -2},
@@ -17,6 +17,7 @@ package my.Level1.Arrays;
 
 import java.util.*;
 
+//в целом ок, но названия методов должны соответствовать тому, что они делают.
 
 public class Task8_MatrixMaxSumRowFinder {
 
@@ -40,21 +41,21 @@ public class Task8_MatrixMaxSumRowFinder {
         return arraySise;
     }
 
-    //Выбор метода заполнения массива [][] matrix
+    //Выбор метода заполнения массива [][] chooseMatrix
     public static int[][] arrayChoice(int[] arraySize) {
         System.out.println("Choice of array filling method:");
         System.out.println("If \"1\" - console filling.");
         System.out.println("If \"2\" - random filling.");
         int n = scanner.nextInt();
+        //до этого было верно, но чтоб было меньше дублирования
+        int[][] matrix;
         if (n == 1) {
-            int[][] matrix = arrayFillingOfConsole(arraySize);
-            matrixArray(matrix);
-            return matrix;
+             matrix = arrayFillingOfConsole(arraySize);
         } else {
-            int[][] matrix = arrayFilingOfRandom(arraySize);
-            matrixArray(matrix);
-            return matrix;
+            matrix = arrayFilingOfRandom(arraySize);
         }
+        matrixArray(matrix);
+        return matrix;
     }
 
     //1. Заполнение массива array [][] из консоли.
@@ -82,9 +83,10 @@ public class Task8_MatrixMaxSumRowFinder {
     }
 
     // Вывод на печать массива arrayFilingOf... [][] и вывод ID с максимальной суммой
+    //не удачное название метода
     public static void matrixArray(int[][] matrix) {
-        int max = 1;
-        int idMax = 1;
+        int max = 1;        //переменная не используется (подсвечена серым). зачем оставили?
+        int idMax = 1;      //переменная не используется (подсвечена серым). зачем оставили?
 
         for (int i = 0; i < matrix.length; i++) {
             System.out.println();
@@ -110,7 +112,7 @@ public class Task8_MatrixMaxSumRowFinder {
     }
 
     /* Создание int [] arraySumString, где каждый элемент массива(для метода 1:int maxSumRow1Index(int[] arraySumString))
-     сумма строки массива int [][] matrix.*/
+     сумма строки массива int [][] chooseMatrix.*/
     public static int[] arraySumString(int[][] matrix) {
         int[] arraySumString = new int[matrix.length];
 
@@ -123,7 +125,7 @@ public class Task8_MatrixMaxSumRowFinder {
     }
 
     //индекс строки с максимальной суммой
-    /*Метод поиска индекса строки с максимальной суммой (метод 2:int maxSumRow2Index(int[][] matrix))*/
+    /*Метод поиска индекса строки с максимальной суммой (метод 2:int maxSumRow2Index(int[][] chooseMatrix))*/
     private static int maxSumRow2Index(int[][] matrix) {
         if (matrix.length == 0) {
             throw new IllegalArgumentException("Matrix is empty");
@@ -140,7 +142,7 @@ public class Task8_MatrixMaxSumRowFinder {
         return index;
     }
 
-    /*сумма по строке(для метода 2:int maxSumRow2Index(int[][] matrix))*/
+    /*сумма по строке(для метода 2:int maxSumRow2Index(int[][] chooseMatrix))*/
     private static int sumRow(int[][] matrix, int row) {
         int sum = 0;
         for (int i = 0; i < matrix[row].length; i++) {
@@ -169,9 +171,10 @@ public class Task8_MatrixMaxSumRowFinder {
         int[] arraySize = arraySize();
         System.out.println(Arrays.toString(arraySize));
         int[][] matrix = arrayChoice(arraySize);
+        //метод 1 не соответствует условию: не бросает исключение если матрица пустая
         int[] arraySumString = arraySumString(matrix);
         System.out.println(Arrays.toString(arraySumString));
-        int idMax = maxSumRow1Index(arraySumString);
+        int idMax = maxSumRow1Index(arraySumString);                    //не удачное название метода: между буквами стоят цифры и приходится "вчитываться"
         System.out.println("maxSumRowIndex (m1) == " + idMax);
         System.out.println("maxSumRowIndex (m2) == " + maxSumRow2Index(matrix));
     }

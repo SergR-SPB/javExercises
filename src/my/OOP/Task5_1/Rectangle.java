@@ -1,6 +1,6 @@
 package my.OOP.Task5_1;
 
-public class Rectangle extends Shape{
+public class Rectangle extends Shape implements ShapeCollection1{
     double width;
     double height;
     public Rectangle(double width,double height) {

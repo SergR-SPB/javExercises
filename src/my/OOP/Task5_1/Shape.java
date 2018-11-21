@@ -2,7 +2,7 @@ package my.OOP.Task5_1;
 
 import java.util.ArrayList;
 
-abstract class Shape implements ShapeCollection1{
+abstract class Shape {
 
     Shape(){};
 

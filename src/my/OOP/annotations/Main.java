@@ -5,8 +5,6 @@ package my.OOP.annotations;
     заданном программой диапазоне - пользователь убит.
     Вычисление рандомного числа - выносится в аннатацию.
 
-
-
   1. Создаем аннотацию для вычисления рандомного числа "public @interface RandomInt",
   2. Создаем класс процессор для аннотации, котрый обробатывает данные из аннотации
      "RandomIntAnnotationProcessor
@@ -18,20 +16,20 @@ package my.OOP.annotations;
 
 public class Main {
 
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args) throws IllegalAccessException, RandomIntAnnotationProcessor.AnnotationInvalidFieldTypeException {
         //1. создаем обьект roulette класса RussianRoulette
         RussianRoulette roulette = new RussianRoulette();
 
-
-
         //2. Вызывается метод setField из класса RandomIntAnnotationProcessor
         // с передачей ему объекта roulette
-     RandomIntAnnotationProcessor.setField(roulette);
-
-
-        //3.roulette.getNumber(); Получаем namber из RussianRoulette через обьект roulette
+        try { //Обработка исключения AnnotationInvalidFieldTypeException
+     RandomIntAnnotationProcessor.setField(roulette);}
+     catch (RandomIntAnnotationProcessor.AnnotationInvalidFieldTypeException ex){
+         System.out.println(ex.getMessage());
+     }
+        //3.roulette.getNumber(); Получаем number из RussianRoulette через обьект roulette
      //System.out.println(roulette.getNumber());
-        //4.Вызывается метод gues из обьекта roulette класса RussianRoulette
+        //4.Вызывается метод guess из обьекта roulette класса RussianRoulette
         // с передачей ему number  = 5
         roulette. guess(5);
     }

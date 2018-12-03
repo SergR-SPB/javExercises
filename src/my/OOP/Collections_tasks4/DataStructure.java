@@ -10,24 +10,24 @@ public interface DataStructure {
 
     //   Колл-во элементов в структуре List
 
-    int size ();
+    int size();
 
 
 
     //Добавление в начало
-    void addFirst(int  value);
+    void addFirst(int value);
 
     //Вобавление в середину
-    void addMiddle (int index,int value );
+    void addMiddle(int index, int value);
 
     //Добавление в конец
-    void addLast (int value);
+    void addLast(int value);
 
     //Добавление другого массива
-    void addList(int index, int[]all);
+    void addList(int index, int[] all);
 
     //Удаление по индксу
-    void remove (int index);
+    void remove(int index);
 
     //Проверка наличия элементов в List
     boolean isEmpty();

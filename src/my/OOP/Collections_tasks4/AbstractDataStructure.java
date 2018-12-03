@@ -1,7 +1,10 @@
 //
 package my.OOP.Collections_tasks4;
 
-public abstract class AbstractDataStructure implements DataStructure {
+
+import my.OOP.Collections_tasks.Collections_tasks_4.DataStructure;
+
+public abstract class AbstractDataStructure  implements DataStructure {
 
     protected int size; //Колличество реально сущ. элементов
                         //(индекс, куда добовлять след. элемент)

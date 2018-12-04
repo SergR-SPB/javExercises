@@ -4,50 +4,37 @@ package my.OOP.Task3;
 для счета-фактуры - ид, покупателя и сумарную стоимость*/
 
 public class Invoice {
-    private int id;                  //это id для счета-фактуры и с id покупателя никак не связано
+
+
+    private long totalCost;
+    private int idInvoice; // для счета-фактуры и с id покупателя никак не связано
     private Customer customer;
-    private long totalCost;          //деньги храним в целом числе
+    //double cashVoucher ;
 
-    public Invoice(int id, Customer customer, long totalCost) {
+    public Invoice(int idInvoice,Customer customer, long totalCost){
 
-        this.id = id;
-        this.customer = customer;
+        this.idInvoice = idInvoice;
         this.totalCost = totalCost;
+        this.customer =customer;
     }
+    public Invoice(){
 
-    public double bidHriceCustomer() {
+    }public double bidHriceCustomer() {
 
-//        totalCost+=this.customer.getId();
+        totalCost+=this.customer.getId();
         return totalCost;
     }
-
-    public int id() {
-        return id;
-    }
-
-    public double getTotalCost() {
-        return totalCost;
-    }
-
-    /*!!!  Не хватает геттеров-сеттеров для полей и переопределенного метода toString() !!!*/
-
-    //стоимость со скидкой
-    public long costWithDiscount() {
-        return (long) (totalCost * (1 - customer.getDiscount()));
-    }
-
-    /*
-    что это за метод и как он должен работать не ясно!
+    public int id() { return idInvoice; }
+    public double getTotalCost() { return totalCost; }
     public void RuneInvoice() {
         Customer[] customers = new Customer[Customer.ligthArrray];
         Invoice []invoices = new Invoice[Customer.ligthArrray];
-        for (int i = 0; i < customers.length; i++) {
-            invoices[i]=new Invoice(customers[i].getId(), totalCost+=customers[i].getCashVoucher());
+        //for (int i = 0; i < customers.length; i++) {
+            //invoices[i]=new Invoice(customers[i].getId(), totalCost+=customers[i].getCashVoucher());
 
 
-        }
+       // }
     }
-    */
 
 
 }

@@ -5,11 +5,9 @@ package my.OOP.Collections_tasks4;
 
 public class DynamicArray extends AbstractDataStructure {
 
-    private int[] array;
+    private int[] array;  //массив должен быть один. временное оно на то и временное, чтобы использовать его в методе и после GC удалил его
     private static final int DEFAULT_CAPACITY = 10; //Дефолтное значение размера
     private double k = 1;
-    private int[] otherArray;//Для временного переноса информации из array
-
 
 
     //Массив для наших элементов
@@ -30,146 +28,129 @@ public class DynamicArray extends AbstractDataStructure {
     //Увеличение размера массива  по необходимости
     private void newLength() {
         if (size == array.length) {
-            array = new int[(int) (1.5 * array.length)];
+            //увеличение в 1.5 раз - плохая идея.
+            // Если начальный размер (capacity) пользователь задаст =1, то никакого увеличения никогда не будет
+            // (int) (1.5 * array.length) всегда будет равно 1
+            int[] tmp = new int[2 * array.length];
+//            array = new int[(int) (1.5 * array.length + 1)];  //или же хотябы 1 добавлять - это если на 1.5 хочется множить
+            System.arraycopy(array, 0, tmp, 0, array.length);//копируем элементы из старого в новый массив
+            array = tmp;
         }
     }
-    private void newLength(int[] all) {
-        if (array.length <= size+all.length){
-            array = new int[(int) 1.5
-                    *(size+all.length)];
+
+    //название переменной all вообще ничего не говорит
+    private void newLength(int[] addedElements) {
+        if (array.length <= size + addedElements.length) {
+            int[] tmp = new int[2 * size + addedElements.length]; //можно так, например сделать
+            System.arraycopy(array, 0, tmp, 0, array.length); //копируем элементы из старого в новый массив
+            array = tmp;
         }
     }
 
     @Override
     public void addFirst(int value) {
-
-        otherArray = array;
         newLength();
-
-        System.arraycopy(otherArray, 0, array, 1,
-                size - 1);
+        if (size > 0) {
+            System.arraycopy(array, 0, array, 1, size);
+        }
         array[0] = value;
         size++;
     }
 
     @Override
     public void addMiddle(int index, int value) {
-        size++;
+        verifyIndex(index);
 
-        otherArray = array;
         newLength();
 
-        System.arraycopy(otherArray, 0, array, 0, index);
-        System.arraycopy(otherArray, index,
-                array, (index + 1),
-                size - (index));
+        System.arraycopy(array, index, array, index + 1, size - index);
         array[index] = value;
+        size++;
     }
-
 
 
     @Override
     public void addLast(int value) {   //Добавление в конец
-        if (size == array.length) {
-            int[] ollArray = array;
-            array = new int[(int) (1.5 * array.length)];
-            System.arraycopy(ollArray, 0, array, 0, size);
-        }
-
+        newLength();
         array[size++] = value;
     }
 
     @Override
     public void addList(int index, int[] all) {
-        //this.all =all;
-        otherArray=array;
+        verifyIndex(index);
+        if (all == null || all.length == 0) { //если ничего не добавляем, то выйти из процедуры - или же можно исключение бросать
+            return;
+        }
         newLength(all);
 
 
-        System.arraycopy(otherArray,0,array,0,index);
-        System.arraycopy(all,0,array,index,all.length);
+        System.arraycopy(array, index, array, index + all.length, size - index); //смещаем элементы начиная с позиции index
+        // на all.length элементов вправо
 
-        System.arraycopy(otherArray, index,
-                array,index+all.length,
-                array.length-(index+all.length)
-                );
-        size = size+all.length;
+        System.arraycopy(all, 0, array, index, all.length); //копируем элементы из all в массив, начиная с позиции index
+        size += all.length;  //сокращенная ж запись есть +=
+    }
 
-
+    private void verifyIndex(int index) {
+        if (index < 0 || index >= size) { //проверка, что индекс в допустимом диазазоне
+            throw new IllegalArgumentException();
         }
+    }
 
     @Override
     public void remove(int index) {
-        otherArray =array;
-        array = new int[array.length];
-        System.arraycopy(otherArray,0,array,0,5);
-        System.arraycopy(otherArray,6,array,index,size-(index+1));
+        verifyIndex(index);
+
+        System.arraycopy(array, index + 1, array, index, array.length - index - 1); //с индекса (index + 1) сдвинуть на позицию влево, т.е. вставить в
+        // позицию index
         size--;
+    }
+
+    //переопределяем метод для вывода
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder()
+                .append("DynamicArray{")
+                .append("array={");
+        for (int i = 0; i < size; i++) {
+            sb.append(array[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+
+        sb.append("}; size=").append(size)
+                .append("}");
+        return sb.toString();
     }
 
     public static void main(String[] args) {
         DynamicArray dynamicArray = new DynamicArray();
-        dynamicArray.addLast(1);
-        dynamicArray.addLast(2);
-        dynamicArray.addLast(3);
-        dynamicArray.addLast(4);
-        dynamicArray.addLast(5);
-        dynamicArray.addLast(6);
-        dynamicArray.addLast(7);
-        dynamicArray.addLast(8);
-        dynamicArray.addLast(9);
-        dynamicArray.addLast(10);
-        dynamicArray.addLast(11);
-        dynamicArray.addLast(3);
+        //есть же циклы! Зачем писать 100 строк для добавления 100 элементов?
+        //и в прошлый раз Вы так же создавали кучу эелементов, а я давал пример как можно сделать в циклах
+        for (int i = 0; i < 11; i++) {
+            dynamicArray.addLast(i);
+        }
+        System.out.println(dynamicArray);
 
-        dynamicArray.addFirst(5);
-        dynamicArray.addFirst(4);
-        dynamicArray.addFirst(3);
+        for (int i = 5; i > 1; i--) {
+            dynamicArray.addFirst(i);
+        }
+        System.out.println(dynamicArray);
 
-        dynamicArray.addLast(9);
-        dynamicArray.addLast(10);
-        dynamicArray.addLast(11);
-//      dynamicArray.addList(2, new int[]{500,500,500});
-        dynamicArray.addFirst(2);
-        dynamicArray.addFirst(1);
-        dynamicArray.addFirst(0);
+        dynamicArray.addList(2, new int[]{777, 878, 987});
+        System.out.println(dynamicArray);
 
+        for (int i = 3; i < 10; i += 2) {
+            dynamicArray.addMiddle(i, i * 11);
+        }
+        System.out.println(dynamicArray);
 
-       dynamicArray.addMiddle(3, 100);
-       dynamicArray.addMiddle(4, 100);
-        dynamicArray.addMiddle(5, 100);
-        dynamicArray.addLast(12);
+        dynamicArray.addLast(-1);
+        System.out.println(dynamicArray);
+
         dynamicArray.remove(10);
-
-        dynamicArray.addLast(6);
-        dynamicArray.addLast(7);
-        dynamicArray.addLast(8);
-
-//        dynamicArray.addFirst(5);
-//        dynamicArray.addFirst(4);
-//        dynamicArray.addFirst(3);
-
-        dynamicArray.addLast(9);
-        dynamicArray.addLast(10);
-        dynamicArray.addLast(11);
-
-        dynamicArray.addFirst(2);
-        dynamicArray.addFirst(1);
-        dynamicArray.addFirst(0);
-       dynamicArray.addList(2, new int[]{500,500,500});
-
-
-        System.out.println();
-        System.out.println(dynamicArray.array.length);
-        System.out.println(dynamicArray.size);
-
-        for (int i = 0; i < dynamicArray.size; i++) {
-            System.out.print(dynamicArray.array[i]+", ");
-        }
-        System.out.println();
-        for (int i = 0; i < dynamicArray.array.length; i++) {
-            System.out.print(dynamicArray.array[i]+", ");
-        }
-
+        dynamicArray.remove(21);
+        System.out.println(dynamicArray);
     }
 }

@@ -2,7 +2,7 @@
 package my.OOP.Collections_tasks4;
 
 
-import my.OOP.Collections_tasks.Collections_tasks_4.DataStructure;
+
 
 public abstract class AbstractDataStructure  implements DataStructure {
 

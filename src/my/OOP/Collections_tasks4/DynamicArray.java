@@ -9,7 +9,7 @@ public class DynamicArray extends AbstractDataStructure {
     private static final int DEFAULT_CAPACITY = 10; //Дефолтное значение размера
     private double k = 1;
     private int[] otherArray;//Для временного переноса информации из array
-    private int[]all;
+
 
 
     //Массив для наших элементов
@@ -42,12 +42,14 @@ public class DynamicArray extends AbstractDataStructure {
 
     @Override
     public void addFirst(int value) {
-        size++;
+
         otherArray = array;
         newLength();
 
-        System.arraycopy(otherArray, 0, array, 1, size - 1);
+        System.arraycopy(otherArray, 0, array, 1,
+                size - 1);
         array[0] = value;
+        size++;
     }
 
     @Override
@@ -58,7 +60,9 @@ public class DynamicArray extends AbstractDataStructure {
         newLength();
 
         System.arraycopy(otherArray, 0, array, 0, index);
-        System.arraycopy(otherArray, (index), array, (index + 1), size - (index));
+        System.arraycopy(otherArray, index,
+                array, (index + 1),
+                size - (index));
         array[index] = value;
     }
 
@@ -77,20 +81,22 @@ public class DynamicArray extends AbstractDataStructure {
 
     @Override
     public void addList(int index, int[] all) {
-
-        this.all =all;
-
+        //this.all =all;
         otherArray=array;
         newLength(all);
 
 
         System.arraycopy(otherArray,0,array,0,index);
         System.arraycopy(all,0,array,index,all.length);
-        System.arraycopy(otherArray,index,array,index+all.length,size-index);
+
+        System.arraycopy(otherArray, index,
+                array,index+all.length,
+                array.length-(index+all.length)
+                );
         size = size+all.length;
 
-        //System.arraycopy(all, index,array,index,all.length);
-    }
+
+        }
 
     @Override
     public void remove(int index) {
@@ -103,9 +109,18 @@ public class DynamicArray extends AbstractDataStructure {
 
     public static void main(String[] args) {
         DynamicArray dynamicArray = new DynamicArray();
+        dynamicArray.addLast(1);
+        dynamicArray.addLast(2);
+        dynamicArray.addLast(3);
+        dynamicArray.addLast(4);
+        dynamicArray.addLast(5);
         dynamicArray.addLast(6);
         dynamicArray.addLast(7);
         dynamicArray.addLast(8);
+        dynamicArray.addLast(9);
+        dynamicArray.addLast(10);
+        dynamicArray.addLast(11);
+        dynamicArray.addLast(3);
 
         dynamicArray.addFirst(5);
         dynamicArray.addFirst(4);
@@ -114,25 +129,25 @@ public class DynamicArray extends AbstractDataStructure {
         dynamicArray.addLast(9);
         dynamicArray.addLast(10);
         dynamicArray.addLast(11);
-
+//      dynamicArray.addList(2, new int[]{500,500,500});
         dynamicArray.addFirst(2);
         dynamicArray.addFirst(1);
         dynamicArray.addFirst(0);
 
 
-//        dynamicArray.addMiddle(3, 100);
-//        dynamicArray.addMiddle(4, 100);
-//        dynamicArray.addMiddle(5, 100);
-//        dynamicArray.addLast(12);
-        //dynamicArray.remove(10);
-        dynamicArray.addList(5, new int[]{500,500,500});
+       dynamicArray.addMiddle(3, 100);
+       dynamicArray.addMiddle(4, 100);
+        dynamicArray.addMiddle(5, 100);
+        dynamicArray.addLast(12);
+        dynamicArray.remove(10);
+
         dynamicArray.addLast(6);
         dynamicArray.addLast(7);
         dynamicArray.addLast(8);
 
-        dynamicArray.addFirst(5);
-        dynamicArray.addFirst(4);
-        dynamicArray.addFirst(3);
+//        dynamicArray.addFirst(5);
+//        dynamicArray.addFirst(4);
+//        dynamicArray.addFirst(3);
 
         dynamicArray.addLast(9);
         dynamicArray.addLast(10);
@@ -141,13 +156,12 @@ public class DynamicArray extends AbstractDataStructure {
         dynamicArray.addFirst(2);
         dynamicArray.addFirst(1);
         dynamicArray.addFirst(0);
+       dynamicArray.addList(2, new int[]{500,500,500});
 
 
         System.out.println();
         System.out.println(dynamicArray.array.length);
         System.out.println(dynamicArray.size);
-        System.out.println(dynamicArray.all.length);
-       // System.out.println(dynamicArray.lastArray.length);
 
         for (int i = 0; i < dynamicArray.size; i++) {
             System.out.print(dynamicArray.array[i]+", ");
